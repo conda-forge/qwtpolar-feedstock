@@ -33,7 +33,7 @@ about:
   home: http://qwtpolar.sourceforge.net/ 
   license: Qwt License, Version 1.0
   license_file: COPYING
-  summary: Polar coordinate system plots for Qwt
+  summary: 'Polar coordinate system plots for Qwt'
 
 extra:
   recipe-maintainers:
