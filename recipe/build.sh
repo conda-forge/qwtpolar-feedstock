@@ -3,8 +3,13 @@
 [[ -d build ]] || mkdir build
 cd build/
 
-export QWT_POLAR_INSTALL_PREFIX=$PREFIX
-export QT_POLAR_INSTALL_PREFIX=$PREFIX
+# Missing g++ workaround.
+ln -s ${GXX} g++ || true
+chmod +x g++
+export PATH=${PWD}:${PATH}
+
+export QWT_POLAR_INSTALL_PREFIX=${PREFIX}
+export QT_POLAR_INSTALL_PREFIX=${PREFIX}
 
 qmake ../qwtpolar.pro
 
