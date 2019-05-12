@@ -20,4 +20,3 @@ cd examples/
 qmake ../../examples/examples.pro
 make
 make check
-

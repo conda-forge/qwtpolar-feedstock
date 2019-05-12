@@ -5,9 +5,8 @@ package:
   version: {{ version }}
 
 source:
-  fn: qwtpolar-{{ version }}.tar.bz2
   url: https://sourceforge.net/projects/qwtpolar/files/qwtpolar/{{ version }}/qwtpolar-{{ version }}.tar.bz2
-  md5: 0f549b51a06fa0f0f43b12f3269fe206
+  sha256: 6168baa9dbc8d527ae1ebf2631313291a1d545da268a05f4caa52ceadbe8b295
   patches:
     # Allow relocatable install
     - qwtpolarconfig.pri.patch
@@ -30,8 +29,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/lib/libqwtpolar.so  # [linux]
-    - test -f ${PREFIX}/lib/libqwtpolar.dylib  # [osx]
+    - test -f ${PREFIX}/lib/libqwtpolar${SHLIB_EXT}  # [not win]
     - if not exist %LIBRARY_BIN%\\qwtpolar.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\qwtpolar.lib exit 1  # [win]
 
