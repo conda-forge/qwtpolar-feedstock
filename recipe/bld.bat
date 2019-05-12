@@ -17,7 +17,7 @@ if errorlevel 1 exit /B 1
 nmake install
 if errorlevel 1 exit /B 1
 :: dll gets copied to the wrong place
-move %LIBRARY_LIB%\qwtpolar.dll %LIBRARY_BIN%\qwtpolar.dll
+move %LIBRARY_LIB%\qwtpolar.dll %LIBRARY_BIN%\qwtpolar_conda.dll
 if errorlevel 1 exit /B 1
 
 :: No test suite, but we can build the "examples/"
