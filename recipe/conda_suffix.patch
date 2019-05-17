@@ -1,0 +1,11 @@
+--- qwtpolar-1.1.1.orig/src/src.pro	2014-09-19 07:28:24.308002267 -0300
++++ qwtpolar-1.1.1/src/src.pro	2019-05-17 08:30:23.329292004 -0300
+@@ -14,7 +14,7 @@
+ include( $${QWT_POLAR_ROOT}/qwtpolarfunctions.pri )
+ 
+ TEMPLATE          = lib
+-TARGET            = $$qwtPolarLibraryTarget(qwtpolar)
++TARGET            = $$qwtPolarLibraryTarget(qwtpolar$${QT_LIBINFIX})
+ 
+ DESTDIR           = $${QWT_POLAR_ROOT}/lib
+ 

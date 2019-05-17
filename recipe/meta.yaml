@@ -12,6 +12,8 @@ source:
     - qwtpolarconfig.pri.patch
     # don't build debug on Windows - fails as Qwt isn't debug
     - config.patch  # [win]
+    # add the _conda suffix patch
+    - conda_suffix.patch  # [win]
 
 build:
   number: 6
@@ -40,8 +42,8 @@ requirements:
 test:
   commands:
     - test -f ${PREFIX}/lib/libqwtpolar${SHLIB_EXT}  # [not win]
-    - if not exist %LIBRARY_BIN%\\qwtpolar.dll exit 1  # [win]
-    - if not exist %LIBRARY_LIB%\\qwtpolar.lib exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\qwtpolar_conda.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\qwtpolar_conda.lib exit 1  # [win]
 
 about:
   home: http://qwtpolar.sourceforge.net/
