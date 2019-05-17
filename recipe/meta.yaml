@@ -5,22 +5,33 @@ package:
   version: {{ version }}
 
 source:
-  fn: qwtpolar-{{ version }}.tar.bz2
   url: https://sourceforge.net/projects/qwtpolar/files/qwtpolar/{{ version }}/qwtpolar-{{ version }}.tar.bz2
-  md5: 0f549b51a06fa0f0f43b12f3269fe206
+  sha256: 6168baa9dbc8d527ae1ebf2631313291a1d545da268a05f4caa52ceadbe8b295
   patches:
     # Allow relocatable install
     - qwtpolarconfig.pri.patch
     # don't build debug on Windows - fails as Qwt isn't debug
     - config.patch  # [win]
+    # add the _conda suffix patch
+    - conda_suffix.patch  # [win]
 
 build:
-  number: 5
+  number: 6
+  skip: True  # [win and vc<14]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux]
+    - {{ cdt('libselinux') }}  # [linux]
+    - {{ cdt('libxdamage') }}  # [linux]
+    - {{ cdt('libxfixes') }}  # [linux]
+    - {{ cdt('libxxf86vm') }}  # [linux]
+    - {{ cdt('libxext-devel') }}  # [linux]
+    - {{ cdt('libxcb') }}  # [linux]
+    - {{ cdt('libXau') }}  # [linux]
   host:
     - qt
     - qwt
@@ -30,10 +41,9 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/lib/libqwtpolar.so  # [linux]
-    - test -f ${PREFIX}/lib/libqwtpolar.dylib  # [osx]
-    - if not exist %LIBRARY_BIN%\\qwtpolar.dll exit 1  # [win]
-    - if not exist %LIBRARY_LIB%\\qwtpolar.lib exit 1  # [win]
+    - test -f ${PREFIX}/lib/libqwtpolar${SHLIB_EXT}  # [not win]
+    - if not exist %LIBRARY_BIN%\\qwtpolar_conda.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\qwtpolar_conda.lib exit 1  # [win]
 
 about:
   home: http://qwtpolar.sourceforge.net/

@@ -1,10 +1,19 @@
 #!/bin/bash
 
+if [[ $target_platform == linux* ]]; then
+  ln -s -t "${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/" $PREFIX/lib/libexpat*
+fi
+
 [[ -d build ]] || mkdir build
 cd build/
 
-export QWT_POLAR_INSTALL_PREFIX=$PREFIX
-export QT_POLAR_INSTALL_PREFIX=$PREFIX
+# Missing g++ workaround.
+ln -s ${GXX} g++ || true
+chmod +x g++
+export PATH=${PWD}:${PATH}
+
+export QWT_POLAR_INSTALL_PREFIX=${PREFIX}
+export QT_POLAR_INSTALL_PREFIX=${PREFIX}
 
 qmake ../qwtpolar.pro
 
@@ -20,4 +29,3 @@ cd examples/
 qmake ../../examples/examples.pro
 make
 make check
-
