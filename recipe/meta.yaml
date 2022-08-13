@@ -16,7 +16,7 @@ source:
     - conda_suffix.patch  # [win]
 
 build:
-  number: 7
+  number: 8
   skip: true  # [win and vc<14]
   merge_build_host: true  # [linux]
   run_exports:
@@ -56,7 +56,7 @@ requirements:
     - {{ cdt('xorg-x11-server-xvfb') }}  # [linux]
     - {{ cdt('pciutils-devel') }}        # [linux]
   host:
-    - qt
+    - qt-main
     - qwt
 
 test:
